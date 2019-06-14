@@ -1,13 +1,9 @@
-import { ADD_ARTICLE } from "../constants/action-types";
-const initialState = {
-  userData: []
-};
-function rootReducer(state = initialState, action) {
-  if (action.type === ADD_ARTICLE) {
-    return Object.assign({}, state, {
-      userData: state.userData.concat(action.payload)
-    });
-  }
-  return state;
-}
+import { combineReducers } from 'redux';
+
+import postsReducer from './posts'
+
+const rootReducer = combineReducers({
+    posts: postsReducer,
+});
+
 export default rootReducer;

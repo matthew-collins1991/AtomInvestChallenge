@@ -6,28 +6,35 @@ import API from "../../Adapters/API.js";
 import UserCardsContainer from "./UserCardsContainer.js";
 import Search from "./Search.js";
 import DetailsCardsContainer from "./DetailsCardsContainer.js";
+import { connect } from "react-redux";
+import { FETCH_POSTS, DELETE_POST } from "../constants/action-types.js";
 
+
+
+const mapStateToProps = state => {
+  return { 
+    posts: state.posts,  
+  };
+};
 
 class App extends React.Component {
   state = {
-    userData: [],
     usersLoaded: false,
     searchTerm: ""
   };
 
   componentDidMount() {
-    API.getUsers().then(users =>
-      this.setState({
-        userData: users,
-        usersLoaded: true
-      })
-    );
+    API.getPosts().then(posts => {
+      this.props.dispatch({ type: FETCH_POSTS, payload: posts})
+      this.setState({ usersLoaded: true })
+    });
   }
 
   filteredData = () => {
-    const { userData, searchTerm } = this.state;
+    const { searchTerm } = this.state;
+    const { posts } = this.props;
     let filteredData = [];
-    filteredData = userData.filter(
+    filteredData = posts.filter(
       user => searchTerm.includes(user.userId) || user.title.includes(searchTerm)
     );
     return filteredData;
@@ -40,13 +47,12 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    this.setState({
-      userData: this.state.userData.filter(data => data.id !== id)
-    })
+    console.log(id)
+    this.props.dispatch({ type: DELETE_POST, id})
   }
 
   getAllWords = () => {
-    let allBodies = this.state.userData.map(user => user.body)
+    let allBodies = this.props.posts.map(user => user.body)
     return allBodies
   }
 
@@ -79,6 +85,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('App props:', this.props)
     if (this.state.usersLoaded) {
       return (
         <div>
@@ -118,7 +125,7 @@ class App extends React.Component {
                     <DetailsCardsContainer
                       {...routerProps}
                       handleDelete={(id)=>this.handleDelete(id)}
-                      selectedUser={this.state.userData.filter(user => user.userId === parseInt(routerProps.match.params.id))}
+                      selectedUser={this.props.posts.filter(post => post.userId === parseInt(routerProps.match.params.id))}
                     />
                     </>
                   );
@@ -130,9 +137,9 @@ class App extends React.Component {
         </div>
       );
     } else {
-      return null;
+      return null
     }
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

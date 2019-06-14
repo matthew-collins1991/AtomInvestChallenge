@@ -1,6 +1,7 @@
 class API {
-  
-    static getUsers() {
+
+
+    static getPosts() {
       return fetch(`https://jsonplaceholder.typicode.com/posts`, {
         method: "GET",
         headers: {
@@ -8,17 +9,6 @@ class API {
         },
       }).then(response => response.json());
     }
-
-    // static getArtwork() {
-    //     return fetch(`${baseUrl}admin/utilities`, {
-    //       method: "GET",
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       },
-    //     }).then(response => response.json());
-    //   }
-  
-  
   
   }
   

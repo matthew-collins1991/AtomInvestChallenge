@@ -1,7 +1,6 @@
 import React from "react"
 import { Grid, Card } from 'semantic-ui-react'
 import UserCard from './UserCard.js'
-import { connect } from "react-redux";
 
 export default class UserCardsContainer extends React.Component {
 

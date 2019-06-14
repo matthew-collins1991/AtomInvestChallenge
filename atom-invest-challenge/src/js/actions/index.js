@@ -1,6 +1,10 @@
 
+import * as actionTypes from "../constants/action-types";
 
-import { ADD_ARTICLE } from "../constants/action-types";
-export function addArticle(payload) {
-  return { type: ADD_ARTICLE, payload };
+export function deletePost(id) {
+  return { type: actionTypes.DELETE_POST, id };
 }
+
+export function fetchPosts(payload) {
+    return { type: actionTypes.FETCH_POSTS, payload };
+  }
