@@ -1,13 +1,11 @@
 import React from "react"
 import { Grid, Card } from 'semantic-ui-react'
 import UserCard from './UserCard.js'
-
+import { connect } from "react-redux";
 
 export default class UserCardsContainer extends React.Component {
 
-  state = {
-    userData: []
-  }
+
 
 getUniqueUsers = (userData) => {
   let userIdsArray = []
@@ -16,10 +14,8 @@ getUniqueUsers = (userData) => {
   return uniqueUsers
 }
 
-componentDidMount(){
-  this.setState({
-    userData: this.props.userData
-  })
+getUniqueUserData = (id) => {
+  return this.props.userData.filter(user => user.userId === id)
 }
 
   render() {
@@ -28,8 +24,8 @@ componentDidMount(){
         <Grid container >
           <Grid.Row column={4}>
         <Card.Group centered >
-          {this.getUniqueUsers(this.state.userData).map(
-            user => <UserCard key={user.id} userData = {this.state.userData} uniqueUser={user} />
+          {this.getUniqueUsers(this.props.userData).map(
+            user => <UserCard key={user} uniqueUserData={this.getUniqueUserData(user)} />
           )}
         </Card.Group>
         </Grid.Row>

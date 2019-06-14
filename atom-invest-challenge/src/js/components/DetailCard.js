@@ -2,19 +2,13 @@ import React from "react";
 import { Item, Button } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 
-export default class DetailCard extends React.Component {
-  state = {
-    selectedUserData: undefined
-  };
 
-  componentDidMount() {
-    this.setState({
-      selectedUserData: this.props.selectedUser
-    });
-  }
+
+export default class DetailCard extends React.Component {
+
 
   render() {
-    const { selectedUserData } = this.state;
+    const { selectedUserData } = this.props;
     if (selectedUserData) {
       return (
         <div id='itemDiv'>
@@ -32,7 +26,6 @@ export default class DetailCard extends React.Component {
                     `/avatars/avatar-${user.userId}.png`
                   }
                 />
-
                 <Item.Content>
                   <Item.Header>{user.title}</Item.Header>
                   <Item.Description>

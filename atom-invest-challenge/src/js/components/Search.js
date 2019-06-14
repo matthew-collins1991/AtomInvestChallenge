@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, Card, Input, Button, Form, Dropdown} from "semantic-ui-react";
 import "../../index.css";
 
-
 export default class Search extends React.Component {
+
   state = {
     search: ""
   };

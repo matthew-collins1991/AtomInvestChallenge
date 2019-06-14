@@ -7,6 +7,7 @@ import UserCardsContainer from "./UserCardsContainer.js";
 import Search from "./Search.js";
 import DetailsCardsContainer from "./DetailsCardsContainer.js";
 
+
 class App extends React.Component {
   state = {
     userData: [],
@@ -115,10 +116,9 @@ class App extends React.Component {
                         top5Words={this.getTop5Words()}
                       />
                     <DetailsCardsContainer
-                      id={routerProps.match.params.id}
                       {...routerProps}
-                      userData={this.state.userData}
                       handleDelete={(id)=>this.handleDelete(id)}
+                      selectedUser={this.state.userData.filter(user => user.userId === parseInt(routerProps.match.params.id))}
                     />
                     </>
                   );

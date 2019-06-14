@@ -4,18 +4,7 @@ import { Link } from 'react-router-dom'
 import "../../index.css";
 
 
-
 export default class UserCard extends React.Component {
-
-  state = {
-    uniqueUserData: undefined
-  }
-
-componentDidMount(){
-  this.setState({
-    uniqueUserData: this.props.userData.filter(user => user.userId === this.props.uniqueUser)
-  })
-}
 
 getShortenedTitles = (uniqueUserData) => {
     let shortTitles = []
@@ -31,10 +20,8 @@ getShortenedTitles = (uniqueUserData) => {
     return shortTitles.slice(0,4)
 }
 
-
-
   render() {
-    const { uniqueUserData } = this.state;
+    const { uniqueUserData } = this.props;
     if (uniqueUserData) {
     return (
         
