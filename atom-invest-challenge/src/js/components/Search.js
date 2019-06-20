@@ -33,9 +33,12 @@ export default class Search extends React.Component {
     return this.props.top5Words.map(word => word[1])
   }
 
+  onDropdownChange = (value) => this.props.submitSearch(value);
+
 
   render() {
     const {top5Words, top5Freq} = this;
+    const { search } = this.state
     return (
       <Grid container>
         <Grid.Row column={16}>
@@ -66,13 +69,30 @@ export default class Search extends React.Component {
                     id="Input"
                     value={`Word Count: ${this.props.wordCount}`} 
                   />
-                  <Dropdown text='Top 5 most common words'>
-                    <Dropdown.Menu>
-                      <Dropdown.Item text={top5Words()[0]} description={top5Freq()[0]}/>
-                      <Dropdown.Item text={top5Words()[1]} description={top5Freq()[1]}/>
-                      <Dropdown.Item text={top5Words()[2]} description={top5Freq()[2]}/>
-                      <Dropdown.Item text={top5Words()[3]} description={top5Freq()[3]}/>
-                      <Dropdown.Item text={top5Words()[4]} description={top5Freq()[4]}/>
+                  <Dropdown 
+                  text='Top 5 most common words'
+                  >
+                    <Dropdown.Menu >
+                      <Dropdown.Item 
+                      text={top5Words()[0]} 
+                      description={top5Freq()[0]} 
+                      onClick={() => this.onDropdownChange(top5Words()[0])}/>
+                      <Dropdown.Item 
+                      text={top5Words()[1]} 
+                      description={top5Freq()[1]} 
+                      onClick={() => this.onDropdownChange(top5Words()[1])}/>
+                      <Dropdown.Item 
+                      text={top5Words()[2]} 
+                      description={top5Freq()[2]} 
+                      onClick={() => this.onDropdownChange(top5Words()[2])}/>
+                      <Dropdown.Item 
+                      text={top5Words()[3]} 
+                      description={top5Freq()[3]} 
+                      onClick={() => this.onDropdownChange(top5Words()[3])}/>
+                      <Dropdown.Item 
+                      text={top5Words()[4]} 
+                      description={top5Freq()[4]} 
+                      onClick={() => this.onDropdownChange(top5Words()[4])}/>
                     </Dropdown.Menu>
                   </Dropdown>
 

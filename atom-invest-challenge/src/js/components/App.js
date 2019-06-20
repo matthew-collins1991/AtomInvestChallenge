@@ -47,7 +47,6 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    console.log(id)
     this.props.dispatch({ type: DELETE_POST, id})
   }
 
@@ -76,7 +75,6 @@ class App extends React.Component {
     for (let word in wordFrequency) {
     wordSort.push([word, wordFrequency[word]]);
     }
-
     wordSort.sort(function(a, b) {
         return b[1] - a[1];
     });
